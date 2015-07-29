@@ -1,6 +1,5 @@
 package chess;
 
-
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -47,8 +46,45 @@ public class ChessBoard {
         updateReversedPieces();
     }
     
+    void updatePositionOfPawn( String piece, Position oldPosition, Position newPosition){
+        String[] pawns = new String[9];
+        Position[] pawn_positions = new Position[9];
+        for(int i=1; i<=8; i++){
+            pawns[i] = piece + i;
+            pawn_positions[i] = pieces.get(pawns[i]);
+        }
+        for(int i=1; i<=8; i++){
+            if(oldPosition.equals(pawn_positions[i])){
+                updateBoard(pawns[i], newPosition);
+                break;
+            }
+        }
+        
+    }
+    
+    void updatePositionOfOthers(String piece, Position oldPosition, Position newPosition){
+        String piece1 = piece + "1";
+        String piece2 = piece + "2";
+        Position pos1 = pieces.get(piece1);
+        Position pos2 = pieces.get(piece2);
+        if(pos1.equals(oldPosition)){
+            updateBoard(piece1,newPosition);
+        }
+        else if(pos2.equals(oldPosition)){
+            updateBoard(piece2, newPosition);
+        }
+    }
     void updateBoard(String piece, Position position){
         pieces.put(piece, position);
+    }
+    
+    void updateBoard(String piece, Position oldPosition, Position newPosition){
+        if(piece.charAt(1)== 'P'){
+            updatePositionOfPawn(piece, oldPosition, newPosition);
+        }
+        else{
+            updatePositionOfOthers(piece, oldPosition, newPosition);
+        }
     }
     
     void updateReversedPieces(){
