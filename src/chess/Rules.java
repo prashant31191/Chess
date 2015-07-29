@@ -5,8 +5,8 @@ package chess;
  */
 public class Rules {
 
-    int [] knightXMove = {  2, 1, -1, -2, -2, -1,  1,  2 };
-    int [] knightYMove= {  1, 2,  2,  1, -1, -2, -2, -1 };
+    private int [] knightXMove = {  2, 1, -1, -2, -2, -1,  1,  2 };
+    private int [] knightYMove= {  1, 2,  2,  1, -1, -2, -2, -1 };
 
     public Position identifyPiece(String piece, Position candidate1, Position candidate2, Position newPosition) {
 
@@ -34,21 +34,21 @@ public class Rules {
         }
     }
 
-    public boolean bishopMoveValid(Position oldPosition, Position newPosition) {
+    private boolean bishopMoveValid(Position oldPosition, Position newPosition) {
         if (Math.abs(oldPosition.getX()-newPosition.getX()) == Math.abs(oldPosition.getY()-newPosition.getY())){
             return true;
         }
         return false;
     }
 
-    public boolean rookMoveValid(Position oldPosition, Position newPosition) {
+    private boolean rookMoveValid(Position oldPosition, Position newPosition) {
         if (oldPosition.getX() == newPosition.getX() || oldPosition.getY() == newPosition.getY()){
             return true;
         }
         return false;
     }
 
-    public boolean knightMoveValid(Position oldPosition, Position newPosition) {
+    private boolean knightMoveValid(Position oldPosition, Position newPosition) {
         for (int i=0; i<8; i++) {
             Position possiblePosition = new Position(oldPosition.getX()+knightXMove[i], oldPosition.getY()+knightYMove[i]);
             if(newPosition.equals(possiblePosition)) {
