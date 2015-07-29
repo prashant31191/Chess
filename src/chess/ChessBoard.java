@@ -75,6 +75,7 @@ public class ChessBoard {
         }
     }
     void updateBoard(String piece, Position position){
+        pieces.remove(piece);
         pieces.put(piece, position);
     }
     
