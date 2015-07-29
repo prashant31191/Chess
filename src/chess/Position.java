@@ -1,8 +1,5 @@
 package chess;
 
-/**
- * Created by test on 7/29/2015.
- */
 public class Position {
     private int x;
     private int y;
@@ -27,8 +24,26 @@ public class Position {
     public int getY() {
         return this.y;
     }
+    
+    public String printPosition(){
+        return ("(" + x + "," + y + ")");
+    }
+    
+   public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
-    public boolean equals(Position position) {
-        return (this.x == position.x && this.y == position.y)?true:false;
+        Position pos = (Position) o;
+
+        if (x != pos.x) return false;
+        if (y != pos.y) return false;
+        
+        return true;
+    }
+
+    public int hashCode() {
+        int result = x;
+        result = 31 * result + y;
+        return result;
     }
 }

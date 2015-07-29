@@ -55,27 +55,16 @@ public class ChessBoard {
         for (Map.Entry<String, Position> piece : pieces.entrySet()) {
             reversed_pieces.put(piece.getValue(), piece.getKey());
         }
-    }
-    
-    void printReversedPieces(){
-        for (Map.Entry<Position, String> item : reversed_pieces.entrySet()) {
-            System.out.println("Position: " + item.getKey().printPosition() + " Piece: " + item.getValue());
-        }
-    }
-
-    void printPieces(){
-        for (Map.Entry<String, Position> item : pieces.entrySet()) {
-            System.out.println("Piece: " + item.getKey() + " Position: " + item.getValue().printPosition());
-        }
-    }    
+    }   
     
     void displayBoard(){
         updateReversedPieces();
         for(int i=8; i>=1; i--){
             for(int j=1; j<=8; j++){
-                Position key = new Position(i,j);
+                Position key = new Position(j,i);
                 String value = reversed_pieces.get(key);
-                System.out.print(value + " ");
+                if(value == null) value = "_";
+                System.out.print(value + "\t");
             }
             System.out.println();
         }
@@ -89,3 +78,5 @@ public class ChessBoard {
         positions[1] = pieces.get(piece2);
         return positions;
     }
+    
+}
