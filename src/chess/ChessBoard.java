@@ -1,12 +1,13 @@
 package chess;
 
-import java.util.LinkedHashMap;
+
+import java.util.HashMap;
 import java.util.Map;
 
 public class ChessBoard {
 
-    Map<String,Position> pieces = new LinkedHashMap<String,Position>();
-    Map<Position,String> reversed_pieces = new LinkedHashMap<Position,String>();
+    Map<String,Position> pieces = new HashMap<String,Position>();
+    Map<Position,String> reversed_pieces = new HashMap<Position,String>();
     
     ChessBoard(){
         pieces.put("WP1", new Position(1,2));
@@ -43,7 +44,7 @@ public class ChessBoard {
         pieces.put("BN2", new Position(7,8));
         pieces.put("BR2", new Position(8,8));
         
-        updateReversedPieces();
+        //updateReversedPieces();
     }
     
     void updatePositionOfPawn( String piece, Position oldPosition, Position newPosition){
@@ -75,7 +76,8 @@ public class ChessBoard {
         }
     }
     void updateBoard(String piece, Position position){
-        pieces.remove(piece);
+        String killedPiece = reversed_pieces.get(position);
+        pieces.remove(killedPiece);
         pieces.put(piece, position);
     }
     
@@ -105,6 +107,7 @@ public class ChessBoard {
             }
             System.out.println();
         }
+        System.out.println();
     }
     
     Position[] getPositionOfPiece(String piece){
@@ -116,4 +119,13 @@ public class ChessBoard {
         return positions;
     }
     
+    Position[] getPositionOfPawn(String piece){
+        Position[] positions = new Position[8];
+        String pawn;
+        for(int i=1; i<=8; i++){
+            pawn = piece + i;
+            positions[i] = pieces.get(pawn);
+        }
+        return positions;
+    }
 }
